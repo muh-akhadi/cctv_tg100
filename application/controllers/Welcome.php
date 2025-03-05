@@ -22,4 +22,9 @@ class Welcome extends CI_Controller {
 	{
 		$this->load->view('index');
 	}
+
+	public function load_gempa()
+	{
+		$this->load->view('load_gempa');
+	}
 }
