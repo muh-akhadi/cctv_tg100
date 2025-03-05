@@ -170,7 +170,7 @@
 
         // Fungsi untuk membuka video di window baru
         function openVideo(stationCode) {
-            var videoUrl = `video/${stationCode}`;
+            var videoUrl = `http://172.19.3.219:8889/${stationCode}`;
             window.open(videoUrl, '_blank');
         }
 
