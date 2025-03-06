@@ -15,12 +15,18 @@
         body { margin: 0; font-family: Arial, sans-serif; height: 100vh; display: flex; flex-direction: column;}
         .navbar {
             display: flex;
-            justify-content: center;
             align-items: center;
-            background-color: #333;
-            padding: 20px;
+            justify-content: center;
+            background-color: #004080;
             color: white;
-            height: 10px;
+            font-size: 18px;
+            font-weight: bold;
+            height: 50px;
+        }
+        .navbar-icon {
+            height: 40px;
+            width: auto;
+            margin-right: 10px;
         }
         
         #map { flex-grow: 1; }
@@ -37,13 +43,30 @@
             background-color: #f2f2f2;
             text-align: left;
         }
+
+        #footer {
+            position: absolute;
+            bottom: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(255, 255, 255, 0.8);
+            padding: 5px 10px;
+            font-size: 11px;
+            border-radius: 5px;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+            z-index: 1000;
+        }
     </style>
 </head>
 <body>
     <div class="navbar">
-        <h2 style="text-align:center;">Map View of Tsunami Gauge Indonesia</h2>
+        <img src="assets/inatews_logo.png" alt="InaTEWS" class="navbar-icon">
+        <h2 style="text-align:center;">InaTEWS - CCTV Monitoring</h2>
     </div>
     <div id="map"></div>
+    <div id="footer">
+        &copy; 2025 Blekok Innovator Team. All rights reserved.
+    </div>
     
     <script>
         // PETA
@@ -66,7 +89,7 @@
 
         async function loadEarthquakeData() {
             try {
-                const response = await fetch("http://localhost/cctv_tg100/load_gempa");
+                const response = await fetch("welcome/load_gempa");
                 const data = await response.json();
 
                 data.sort((a, b) => new Date(b.time) - new Date(a.time));
@@ -80,7 +103,7 @@
                     let isLatest = index ===0;
                     let marker;
                     var latestIconGempa = L.icon.pulse({
-                        iconSize: [10,10],
+                        iconSize: [12,12],
                         color: 'red',
                     })
                     if (isLatest) {
@@ -91,7 +114,7 @@
                             fillColor: getDepthColor(depth),
                             color: "#000",
                             weight: 0.2,
-                            fillOpacity: 0.5
+                            fillOpacity: 0.3
                     });
                     }
                     marker.bindPopup(`
@@ -116,8 +139,8 @@
             let iconUrl = status === "UP" ? "assets/cctv_blue.png" : "assets/cctv_orange.png";
             return L.icon({
                 iconUrl: iconUrl,
-                iconSize: [12, 12],
-                iconAnchor: [6, 12],
+                iconSize: [14, 14],
+                iconAnchor: [7, 14],
                 popupAnchor: [0, -32]
             })
         }
@@ -156,7 +179,7 @@
                             <tr><th>Prov</th><td>:</td><td>${feature.properties.PROVINSI}</td></tr>
                         </table>`;
                         
-                        layer.bindPopup(popupContent);
+                        layer.bindPopup(popupContent, { offset: L.point(0, 32)});
                     }
                 }
                 
