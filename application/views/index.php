@@ -203,7 +203,7 @@
                 }
                 </style>
                 <div><b>Status CCTV</b>
-                <a href="http://172.19.3.219:1880/ui/" target="_blank">
+                <a href="http://localhost/ui/" target="_blank">
                     <img src="assets/alert-square-rounded.png" class="legend-icon" title="Lihat detail status">
                 </a></div>
                 <div class="legend-item">
